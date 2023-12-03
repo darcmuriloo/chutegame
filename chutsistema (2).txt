@@ -1,0 +1,65 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class JogoFutebol extends JFrame implements ActionListener, KeyListener {
+    private int jogadorX = 50;
+    private int jogadorY = 150;
+
+    private Timer timer;
+
+    public JogoFutebol() {
+        setTitle("Jogo Fut BolsoLula");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+
+        timer = new Timer(10, this);
+        timer.start();
+
+        addKeyListener(this);
+        setFocusable(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        
+        repaint();
+    }
+
+    public void paint(Graphics g) {
+        super.paint(g);
+        Graphics2D g2d = (Graphics2D) g;
+
+        
+        g2d.setColor(Color.BLUE);
+        g2d.fillRect(jogadorX, jogadorY, 20, 20);
+    }
+
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            
+            int bolaX = jogadorX + 30; // Posição inicial da bola (ajuste conforme necessário)
+            int bolaY = jogadorY; // Posição inicial da bola (ajuste conforme necessário)
+
+           
+            repaint();
+        }
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JogoFutebol jogo = new JogoFutebol();
+            jogo.setVisible(true);
+        });
+    }
+}
